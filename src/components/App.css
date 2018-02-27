@@ -1,0 +1,18 @@
+.App {
+  background: #f5f5f5;
+  padding: 1rem;
+  width: 60%;
+  margin: 1rem auto 0;
+}
+.App-status {
+  margin-right: 1rem;
+}
+.App-status--Running {
+  color: green;
+}
+.App-status--Starting {
+  color: gray;
+}
+.App-status--Stopped {
+  color: red;
+}
