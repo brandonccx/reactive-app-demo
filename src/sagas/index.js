@@ -9,7 +9,7 @@ function* start ({id, status}) {
     id,
     status: AppStatus.STARTING
   });
-  yield delay(1000);
+  yield delay(2000);
   yield put({
     type: UPDATE_STATUS,
     id,
