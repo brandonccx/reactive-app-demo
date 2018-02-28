@@ -1,13 +1,29 @@
 import { delay } from 'redux-saga';
-import { put, takeEvery } from 'redux-saga/effects';
-import { UPDATE_STATUS, ASYNC_UPDATE_STATUS } from '../actions/actionTypes';
+import { put, takeEvery, all } from 'redux-saga/effects';
+import {
+  UPDATE_STATUS,
+  REMOVE_APP,
+  ASYNC_UPDATE_STATUS,
+  ASYNC_REMOVE_STATUS
+} from '../actions/actionTypes';
 import { AppStatus } from '../constants';
 
-function* start ({id, status}) {
+function* update ({id, status}) {
+  let loadingStatus;
+  switch (status) {
+    case AppStatus.RUNNING:
+      loadingStatus = AppStatus.STARTING;
+      break;
+    case AppStatus.STOPPED:
+      loadingStatus = AppStatus.STOPPING;
+      break;
+    default:
+      loadingStatus = 'LOADING';
+  }
   yield put({
     type: UPDATE_STATUS,
     id,
-    status: AppStatus.STARTING
+    status: loadingStatus
   });
   yield delay(2000);
   yield put({
@@ -17,8 +33,32 @@ function* start ({id, status}) {
   });
 }
 
-function* watchStart () {
-  yield takeEvery(ASYNC_UPDATE_STATUS, start);
+function* remove ({id}) {
+  yield put({
+    type: UPDATE_STATUS,
+    id,
+    status: AppStatus.REMOVING
+  });
+  yield delay(1000);
+  yield put({
+    type: REMOVE_APP,
+    id
+  });
 }
 
-export default watchStart;
+function* watchUpdate () {
+  yield takeEvery(ASYNC_UPDATE_STATUS, update);
+}
+
+function* watchRemove () {
+  yield takeEvery(ASYNC_REMOVE_STATUS, remove);
+}
+
+function* rootSaga () {
+  yield all([
+    watchUpdate(),
+    watchRemove()
+  ]);
+}
+
+export default rootSaga;

@@ -1,3 +1,5 @@
 export const ADD_APP = 'ADD_APP';
+export const REMOVE_APP = 'REMOVE_APP';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const ASYNC_UPDATE_STATUS = 'ASYNC_UPDATE_STATUS';
+export const ASYNC_REMOVE_STATUS = 'ASYNC_REMOVE_STATUS';

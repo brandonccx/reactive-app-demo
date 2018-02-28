@@ -9,7 +9,7 @@ import './index.css';
 import Main from './Main';
 import registerServiceWorker from './registerServiceWorker';
 import reducers from './reducers';
-import watchStart from './sagas';
+import rootSaga from './sagas';
 import storage from 'redux-persist/lib/storage';
 
 const persistConfig = {
@@ -24,7 +24,7 @@ const store = createStore(
 );
 const persistor = persistStore(store);
 
-sagaMiddleware.run(watchStart);
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

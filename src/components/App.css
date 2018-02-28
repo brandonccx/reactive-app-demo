@@ -10,7 +10,9 @@
 .App-status--Running {
   color: green;
 }
-.App-status--Starting {
+.App-status--Removing,
+.App-status--Starting,
+.App-status--Stopping {
   color: gray;
 }
 .App-status--Stopped {

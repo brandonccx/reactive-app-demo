@@ -10,7 +10,9 @@ const App = props => {
       <b className={`App-status App-status--${status}`}>
         {status}
       </b>
-      <button onClick={props.onStart}>start</button>
+      <button onClick={props.onStart}>Start</button>
+      <button onClick={props.onStop}>Stop</button>
+      <button onClick={props.onRemove}>Remove</button>
     </div>
   );
 };
